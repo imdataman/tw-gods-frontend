@@ -1,4 +1,4 @@
-# tw-gods-frontend
+# 台灣廟宇地圖
 
 ## Project setup
 ```

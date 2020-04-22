@@ -16,16 +16,7 @@
           <g class="background">
             <path :d="path(background)"></path>
           </g>
-          <g class="grid">
-            <path
-              v-for="block in grid"
-              :key="`${god.id}${block.properties.id}`"
-              :d="path(block)"
-              :style="{
-                fill: colorScale.get(god.id)(block.properties[god.id])
-              }"
-            ></path>
-          </g>
+          <g :class="`grid${god.id}`"></g>
           <g class="outline">
             <path :d="path(outline)"></path>
           </g>
@@ -62,6 +53,7 @@ import godsList from "@/assets/data/gods-list.json";
 import { extent } from "d3-array";
 import { geoPath, geoConicEqualArea } from "d3-geo";
 import { scaleQuantize } from "d3-scale";
+import { select } from "d3-selection";
 
 import * as topojson from "topojson-client";
 
@@ -116,6 +108,17 @@ export default {
     outline() {
       return topojson.mesh(county);
     }
+  },
+  mounted() {
+    this.godsList.forEach(d =>
+      select(`.grid${d.id}`)
+        .selectAll(".block")
+        .data(this.grid)
+        .join("path")
+        .classed("block", true)
+        .attr("d", j => this.path(j))
+        .attr("fill", j => this.colorScale.get(d.id)(j.properties[d.id]))
+    );
   }
 };
 </script>

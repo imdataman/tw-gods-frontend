@@ -181,7 +181,7 @@ export default {
     fill: white;
     stroke: black;
     paint-order: stroke;
-    stroke-width: 0.75px;
+    stroke-width: 1px;
   }
 }
 
@@ -191,9 +191,6 @@ export default {
   }
   .mapText {
     font-size: 0.8rem;
-    li {
-      font-size: 0.5rem;
-    }
   }
 }
 </style>

@@ -20,24 +20,26 @@
           <g class="outline">
             <path :d="path(outline)"></path>
           </g>
-          <g
-            class="highlight"
-            v-for="location in god.highlight"
-            :key="location.location"
-          >
-            <text
-              :x="projection(location.coord)[0]"
-              :y="projection(location.coord)[1]"
-              dy="-6"
+          <g class="highlightWrapper">
+            <g
+              class="highlight"
+              v-for="location in god.highlight"
+              :key="location.location"
             >
-              {{ location.id }}
-            </text>
-            <circle
-              :cx="projection(location.coord)[0]"
-              :cy="projection(location.coord)[1]"
-              r="1.5"
-            ></circle>
-            <!-- <polyline :points="polyline.get(god.id)"></polyline> -->
+              <text
+                :x="projection(location.coord)[0]"
+                :y="projection(location.coord)[1]"
+                dy="-6"
+              >
+                {{ location.id }}
+              </text>
+              <circle
+                :cx="projection(location.coord)[0]"
+                :cy="projection(location.coord)[1]"
+                r="1.5"
+              ></circle>
+              <!-- <polyline :points="polyline.get(god.id)"></polyline> -->
+            </g>
           </g>
         </svg>
       </div>
@@ -110,15 +112,16 @@ export default {
     }
   },
   mounted() {
-    this.godsList.forEach(d =>
+    this.godsList.forEach(d => {
+      const color = this.colorScale.get(d.id);
       select(`.grid${d.id}`)
         .selectAll(".block")
         .data(this.grid)
         .join("path")
         .classed("block", true)
         .attr("d", j => this.path(j))
-        .attr("fill", j => this.colorScale.get(d.id)(j.properties[d.id]))
-    );
+        .attr("fill", j => color(j.properties[d.id]));
+    });
   }
 };
 </script>
@@ -158,7 +161,7 @@ export default {
   stroke-dasharray: 1;
 }
 
-.grid {
+.block {
   stroke: none;
 }
 

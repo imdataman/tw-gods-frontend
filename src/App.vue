@@ -20,7 +20,7 @@
         <span>
           資料來源：<a
             target="_blank"
-            href="https://segis.moi.gov.tw/STAT/Generic/Project/GEN_STAT.ashx?method=downloadproductfile&code=433B6C121D32439A6239FE8CBE94A3D3&STTIME=108Y&STUNIT=null&BOUNDARY=全國"
+            href="https://data.moi.gov.tw/MoiOD/Data/DataDetail.aspx?oid=1B56C087-43D9-4B4B-B08C-D7B6A750E033"
             >內政部</a
           >
         </span>

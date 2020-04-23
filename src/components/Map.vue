@@ -1,9 +1,22 @@
 <template>
   <div class="map">
     <div class="mapWrapper">
-      <div class="mapContainer" v-for="god in godsList" :key="god.id">
+      <div
+        class="mapContainer"
+        v-for="(god, i) in godsList"
+        :key="god.id"
+        :class="{ lastOne: i === godsList.length - 1 }"
+      >
         <div class="mapText">
           <h3>{{ god.name }}</h3>
+          <p
+            v-for="(p, i) in god.description"
+            :key="`${god.id}${i}description`"
+          >
+            {{ p }}
+          </p>
+        </div>
+        <div class="highlightText">
           <ol>
             <li
               v-for="(l, i) in god.highlight"
@@ -52,9 +65,8 @@ import grid from "@/assets/data/final-grid.json";
 import county from "@/assets/data/tw-county.json";
 import godsList from "@/assets/data/gods-list.json";
 
-import { extent } from "d3-array";
 import { geoPath, geoConicEqualArea } from "d3-geo";
-import { scaleQuantize } from "d3-scale";
+import { scaleQuantile } from "d3-scale";
 import { select } from "d3-selection";
 
 import * as topojson from "topojson-client";
@@ -88,8 +100,8 @@ export default {
       return new Map(
         this.godsList.map(d => [
           d.id,
-          scaleQuantize()
-            .domain(extent(this.grid.map(j => j.properties[d.id])))
+          scaleQuantile()
+            .domain(this.grid.map(j => j.properties[d.id]))
             .range(this.colorPalette)
         ])
       );
@@ -137,16 +149,33 @@ export default {
 .mapContainer {
   width: 450px;
   position: relative;
-  padding-bottom: 50px;
+  margin-bottom: 50px;
+}
+
+.highlightText {
+  position: absolute;
+  left: 1rem;
+  bottom: 0rem;
+  ol {
+    padding-inline-start: 1rem;
+    font-size: 0.75rem;
+  }
+}
+
+.lastOne {
+  margin-bottom: 0px;
+  .highlightText {
+    bottom: 50px;
+  }
 }
 
 .mapText {
   position: absolute;
   left: 1rem;
-  top: 1rem;
-  color: black;
-  ol {
-    padding-inline-start: 1rem;
+  top: 0rem;
+  width: 60%;
+  p {
+    word-wrap: break-word;
   }
 }
 
@@ -194,6 +223,11 @@ export default {
   }
   .mapText {
     font-size: 0.8rem;
+  }
+  .lastOne {
+    .highlightText {
+      bottom: 0px;
+    }
   }
 }
 </style>

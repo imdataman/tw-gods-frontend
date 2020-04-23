@@ -173,8 +173,13 @@ export default {
   position: absolute;
   left: 1rem;
   top: 0rem;
-  width: 60%;
+  width: 95%;
+  h3 {
+    text-align: right;
+    margin-bottom: 2rem;
+  }
   p {
+    max-width: 60%;
     word-wrap: break-word;
   }
 }
@@ -223,6 +228,10 @@ export default {
   }
   .mapText {
     font-size: 0.8rem;
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
   }
   .lastOne {
     .highlightText {

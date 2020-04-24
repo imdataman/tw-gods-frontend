@@ -8,12 +8,12 @@
         :class="{ lastOne: i === godsList.length - 1 }"
       >
         <div class="mapText">
-          <h3>{{ god.name }}</h3>
           <p
             v-for="(p, i) in god.description"
             :key="`${god.id}${i}description`"
           >
-            {{ p }}
+            <span v-if="i === 0">{{ god.name }}</span
+            >{{ p }}
           </p>
         </div>
         <div class="highlightText">
@@ -51,7 +51,6 @@
                 :cy="projection(location.coord)[1]"
                 r="1.5"
               ></circle>
-              <!-- <polyline :points="polyline.get(god.id)"></polyline> -->
             </g>
           </g>
         </svg>
@@ -159,6 +158,7 @@ export default {
   ol {
     padding-inline-start: 1rem;
     font-size: 0.75rem;
+    color: #4d4d4d;
   }
 }
 
@@ -172,15 +172,17 @@ export default {
 .mapText {
   position: absolute;
   left: 1rem;
-  top: 0rem;
+  top: 3rem;
   width: 95%;
-  h3 {
-    text-align: right;
-    margin-bottom: 2rem;
-  }
   p {
     max-width: 60%;
     word-wrap: break-word;
+    span {
+      font-size: 1.5rem;
+      font-weight: 600;
+      padding-right: 0.15rem;
+      color: goldenrod;
+    }
   }
 }
 

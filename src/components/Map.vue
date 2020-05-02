@@ -79,7 +79,16 @@ export default {
       godsList: godsList,
       width: 300,
       height: 410,
-      colorPalette: ["#eff3ff", "#bdd7e7", "#6baed6", "#2171b5"],
+      colorPalette: [
+        "#f7fbff",
+        "#deebf7",
+        "#c6dbef",
+        "#9ecae1",
+        "#6baed6",
+        "#4292c6",
+        "#2171b5",
+        "#084594"
+      ],
       highlightLength: 40
     };
   },
@@ -158,7 +167,7 @@ export default {
   ol {
     padding-inline-start: 1rem;
     font-size: 0.75rem;
-    color: #4d4d4d;
+    opacity: 0.7;
   }
 }
 
@@ -194,7 +203,7 @@ export default {
   fill: none;
   stroke: black;
   stroke-width: 0.5px;
-  stroke-dasharray: 1;
+  // stroke-dasharray: 1;
 }
 
 .block {

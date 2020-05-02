@@ -203,7 +203,7 @@ export default {
   fill: none;
   stroke: black;
   stroke-width: 0.5px;
-  // stroke-dasharray: 1;
+  stroke-dasharray: 1;
 }
 
 .block {
